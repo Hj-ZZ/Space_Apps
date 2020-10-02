@@ -5,7 +5,9 @@ from django.db.models import Model
 
 class User(AbstractUser):
     # Image with no urls
-    image = models.ImageField(blank=True, upload_to="images/%Y/%m/%D/", default = 'images/default.jpg')
+    image = models.ImageField(
+        default="images/default.png", upload_to="images/%Y/%m/%D/",
+    )
     name = models.CharField(max_length=100, blank=True, null=True)
     bio = models.CharField(max_length=400, blank=True, null=True)
 
@@ -144,6 +146,9 @@ class Follow(models.Model):
         return {
             "id": self.id,
         }
+
+    class Meta:
+        unique_together = ["follower", "followee"]
 
 
 class Category(models.Model):

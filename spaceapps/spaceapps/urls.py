@@ -18,8 +18,14 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
+<<<<<<< HEAD
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("app.urls"))
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+=======
+urlpatterns = [path("admin/", admin.site.urls), path("", include("app.urls"))]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+>>>>>>> f56f4fdd16ac8c0c1f8ead8e8b66dd8b375343d4

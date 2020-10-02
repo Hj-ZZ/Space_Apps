@@ -16,7 +16,7 @@ from .models import *
 
 def index(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect(reverse("mainPage"))
+        return HttpResponseRedirect(reverse("home"))
     return render(request, "app/landingPage.html")
 
 
@@ -182,10 +182,10 @@ def follow(request, user_id):
         user_target = User.objects.get(pk=user_id)
     except User.DoesNotExist:
         return JsonResponse({"error": "User Not found."}, status=400)
-    Follow.objects.all()
     try:
         # Unfollow
-        Follow.objects.get(following=user_target, follower=request.user).delete()
+        Follow.objects.get(follower=request.user, followee=user_target).delete()
+
         return JsonResponse(
             {
                 "message": "Unfollowed successfully",
@@ -196,7 +196,7 @@ def follow(request, user_id):
         )
     except Follow.DoesNotExist:
         # follow
-        Follow.objects.create(follower=user_target, following=request.user)
+        Follow.objects.create(follower=request.user, followee=user_target)
         return JsonResponse(
             {
                 "message": "followed successfully",
@@ -236,3 +236,25 @@ def follow_users(request, user_id, type):
 def getArticles(request):
     articles = Article.objects.all()
     return JsonResponse([article.serialize() for article in articles], safe=False)
+
+
+def profile(request, user_id):
+    if request == "GET":
+        return HttpResponseRedirect(reverse("index"))
+    try:
+        user = User.objects.get(pk=user_id)
+    except User.DoesNotExist:
+        # TODO: User not found page
+        return HttpResponse("<h1>Page was found</h1>")
+    try:
+        is_followed = request.user in user.followers.all()
+    except:
+        is_followed = False
+    posts = user.posts.order_by("-date_created").all()
+
+    data = {
+        "profile": user,
+        "posts": posts,
+        "is_followed": is_followed,
+    }
+    return render(request, "app/profile.html", context=data)
