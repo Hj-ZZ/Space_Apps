@@ -16,7 +16,7 @@ from .models import *
 
 def index(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect(reverse("mainPage"))
+        return HttpResponseRedirect(reverse("home"))
     return render(request, "app/landingPage.html")
 
 
@@ -236,3 +236,25 @@ def follow_users(request, user_id, type):
 def getArticles(request):
     articles = Article.objects.all()
     return JsonResponse([article.serialize() for article in articles], safe=False)
+
+
+def profile(request, user_id):
+    if request == "GET":
+        return HttpResponseRedirect(reverse("index"))
+    try:
+        user = User.objects.get(pk=user_id)
+    except User.DoesNotExist:
+        # TODO: User not found page
+        return HttpResponse("<h1>Page was found</h1>")
+    try:
+        is_followed = request.user in user.followers.all()
+    except:
+        is_followed = False
+    posts = user.posts.order_by("-date_created").all()
+
+    data = {
+        "profile": user,
+        "posts": posts,
+        "is_followed": is_followed,
+    }
+    return render(request, "app/profile.html", context=data)

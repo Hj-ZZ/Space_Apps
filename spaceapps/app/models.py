@@ -5,7 +5,9 @@ from django.db.models import Model
 
 class User(AbstractUser):
     # Image with no urls
-    image = models.ImageField(blank=True, null=True, upload_to="images/%Y/%m/%D/")
+    image = models.ImageField(
+        default="images/default.png", upload_to="images/%Y/%m/%D/",
+    )
     name = models.CharField(max_length=100, blank=True, null=True)
     bio = models.CharField(max_length=400, blank=True, null=True)
 
