@@ -147,6 +147,9 @@ class Follow(models.Model):
             "id": self.id,
         }
 
+    class Meta:
+        unique_together = ["follower", "followee"]
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)

@@ -6,20 +6,17 @@ document.addEventListener('DOMContentLoaded', function () {
   alert("hello world")
   try {
       follow_btn = document.querySelector('.follow-btn');
+      user_id = parseInt(follow_btn.dataset.user_id)
+      follow_btn.addEventListener('click',()=>follow(user_id))
+
       // get data from the dataset
       is_followed = follow_btn.dataset.is_followed === "True"
-      console.log(follow_btn.dataset.is_followed)
 
-      console.log(typeof is_followed)
-      alert("hUUAUAUAUUAUAUAUUAu")
-
-      user_id = parseInt(follow_btn.dataset.user_id)
       followers_count =  parseInt(follow_btn.dataset.followers_count)
 
       //creating and adding event listener to the follow btn
       updateFollowStats();
 
-      follow_btn.addEventListener('click',()=>follow())
 
     } catch (error) {
 
@@ -30,18 +27,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 function updateFollowStats(){
-  alert("hUUAUAUAUUAUAUAUUAu")
 
-    document.querySelector("#followers_count").innerText = followers_count;
+    document.querySelector("#followers-cnt").innerText = followers_count;
     document.querySelector('#follow-btn').innerHTML = is_followed ? "unfollow":"follow";
-    document.querySelector('#follow-btn').style.backgroundColor = is_followed ? "red":"blue";
-
 
 }
-function follow(){
-  alert("JSJSJSJSJSJS")
+function follow(user_id){
 
-  fetch('/follow/', {
+  fetch(`/follow/${user_id}`, {
           method: 'POST',
           body: JSON.stringify({
               user: user_id,
@@ -49,7 +42,6 @@ function follow(){
       })
       .then(response => response.json())
       .then(result => {
-          // Print result
           console.log(result);
           followers_count = result.followers_count
           is_followed = result.is_followed

@@ -182,10 +182,10 @@ def follow(request, user_id):
         user_target = User.objects.get(pk=user_id)
     except User.DoesNotExist:
         return JsonResponse({"error": "User Not found."}, status=400)
-    Follow.objects.all()
     try:
         # Unfollow
-        Follow.objects.get(following=user_target, follower=request.user).delete()
+        Follow.objects.get(follower=request.user, followee=user_target).delete()
+
         return JsonResponse(
             {
                 "message": "Unfollowed successfully",
@@ -196,7 +196,7 @@ def follow(request, user_id):
         )
     except Follow.DoesNotExist:
         # follow
-        Follow.objects.create(follower=user_target, following=request.user)
+        Follow.objects.create(follower=request.user, followee=user_target)
         return JsonResponse(
             {
                 "message": "followed successfully",
