@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous"/>
+    <link href="https://fonts.googleapis.com/css2?family=Gayathri:wght@100&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Taviraj:wght@300;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'app/style.css' %}">
+    <title>Profil</title>
+</head>
+<body>
+    <div class="profil-container">
+        <div class="categories">
+
+        </div>
+        <main class="profil">
+            <div class="about-me">
+                <div class="top-i">
+                    <i class="fas fa-2x fa-chevron-left" id = "return-i"></i>
+                    <i class="fas fa-2x fa-bell" id = "bell-i"></i>
+                    <i class="fas fa-2x fa-ellipsis-h" id = "settings-i"></i>
+                </div>
+                <div class="p-data">
+                    <span id="name">{{profile.name}}</span>
+                    <img src="{{profile.image.url}}" alt="{{profile.image.url}}" id="picture">
+                    <i class="fas fa-2x fa-plus-circle" id= "update-img"></i>
+                    <span id="username">@{{profile.username}}</span>
+                    <span id="bio"> {{profile.bio}} </span>
+                    <div class="follow-info">
+                        <div id="followers">
+                            <span>Followers</span>
+                            <span id="followers-cnt">{{profile.followers_count}}</span>
+                        </div>
+                        <div id="following">
+                            <span>Following</span>
+                            <span id="following-cnt">{{profile.followees_count}}</span>
+                        </div>
+                        <div id="rating">
+                            <span>Rating</span>
+                            <span id="rating-cnt">0</span>
+                        </div>
+                    </div>
+                    <div id="profil-buttons">
+                      {% if profile.id != user.id %}
+                        <button class="follow-btn" id = "follow-btn"
+                        data-followers_count = "{{profile.followers_count }}"
+                        data-user_id = "{{ profile.id }}"
+                        data-is_followed="{{is_followed}}">{% if is_followed%}Unfollow{% else %}Follow{%endif%}</button>
+                      {% else %}
+                        <button class="edit-btn">Edit Profil</button>
+                      {% endif %}
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+<script src = "{% static 'app/profile.js' %}"></script>
+
+</html>
