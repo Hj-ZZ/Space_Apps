@@ -32,7 +32,7 @@ class User(AbstractUser):
 class Article(models.Model):
     title = models.CharField(max_length=200)
     text = models.TextField()
-    Authors = models.ForeignKey(
+    authors = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, related_name="articles"
     )
     post = models.OneToOneField("Post", on_delete=models.CASCADE)
@@ -58,7 +58,7 @@ class Article(models.Model):
             "content": self.text,
             "image": self.image.url,
             "date": self.date_created,
-            "authors": self.Authors_id,
+            "authors": self.authors_id,
         }
 
 
