@@ -1,0 +1,128 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Gruppo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Lobster&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rokkitt&display=swap" rel="stylesheet">
+    <script src="https://use.fontawesome.com/9562af5d6b.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js" integrity="sha512-IQLehpLoVS4fNzl7IfH8Iowfm5+RiMGtHykgZJl9AWMgqx0AmJ6cRWcB+GaGVtIsnC4voMfm8f2vwtY+6oPjpQ==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'app/style.css' %}">
+    <title>Landing Page</title>
+</head>
+<body>
+    <main>
+        <!--Navbar-->
+        <nav class="navbar">
+            <ul class="navbar-nav">
+                <li class="list-item">
+                    <a href="#" class="list-link first-link">
+                        <span class="link-text">Works</span>
+                        <span id="underline"></span>
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a href="#" class="list-link">
+                        <span class="link-text">Services</span>
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a href="#" class="list-link">
+                        <span class="link-text">Company</span>
+                    </a>
+                </li>
+                <li class="list-item">
+                    <a href="#" class="list-link">
+                        <span class="link-text">Contact</span>
+                    </a>
+                </li>
+            </ul>
+            <a href="#" class="list-link menu-icon">
+                <span id="m-1"></span>
+                <span id="m-2"></span>
+            </a>
+        </nav>
+        <!--Button Title and Description-->
+        <div class="left-half">
+            <h1 id="title">Some Catchy Title<span id = "dot">.</span></h1>
+            <p id = "description">For an educated generation bla bla smth</p>
+            <button class="btn join">Join Us</button>
+        </div>
+        <!--Social Media-->
+        <div class="social-media">
+            <i class="fab fa-lg fa-facebook"></i>
+            <i class="fab fa-lg fa-twitter"></i>
+            <i class="fab fa-lg fa-instagram"></i>
+        </div>
+        <!--Tree-->
+        <img src="{% static 'app/imgs/output-onlinepngtools (1).png'%}" alt="Tree" id = "tree">
+    </main>
+    <!--Forms-->
+    <div class="forms">
+        <div class="container" id="container">
+            <i class="far fa-2x fa-times-circle"></i>
+         <div class="form-container sign-up-container">
+             <form action="{% url 'register' %}" method="post">
+                {% csrf_token %}
+                 <h1>Create Account</h1>
+                 <div class="social-container">
+                     <a href="#" class="social"><i class="fa fa-lg fa-facebook"></i></a>
+                     <a href="#" class="social"><i class="fa fa-lg fa-google-plus"></i></a>
+                     <a href="#" class="social"><i class="fa fa-lg fa-linkedin"></i></a>
+                 </div>
+                 <span>or use your email for registration</span>
+                 <input type="text" name = "name" placeholder="Name" />
+                 <input type="email" name = "email" placeholder="Email" />
+                 <input type="password" name = "password" placeholder="Password" />
+                 <input type="password" name = "confirmation" placeholder="Confirm password" />
+
+                 <button>Sign Up</button>
+             </form>
+         </div>
+         <div class="form-container sign-in-container">
+            <form class = "loginForm">
+
+                 <h1>Sign in</h1>
+                 <div class="social-container">
+                     <a href="#" class="social"><i class="fa fa-lg fa-facebook"></i></a>
+                     <a href="#" class="social"><i class="fa fa-lg fa-google-plus"></i></a>
+                     <a href="#" class="social"><i class="fa fa-lg fa-linkedin"></i></a>
+                 </div>
+                 <span>or use your account</span>
+
+                 <input type="username" name = "username" placeholder="Username" class = "usernameForm"/>
+                 <input type="password" name = "password" placeholder="Password" class = "passwordForm" />
+                 <a style="text-decoration: underline" href="#" class="ind">Forgot your password?</a>
+                 <button>Sign In</button>
+             </form>
+         </div>
+        <div class="overlay-container">
+            <div class="curve">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#52B788" fill-opacity="1" d="M0,320L26.7,304C53.3,288,107,256,160,218.7C213.3,181,267,139,320,106.7C373.3,75,427,53,480,85.3C533.3,117,587,203,640,213.3C693.3,224,747,160,800,144C853.3,128,907,160,960,170.7C1013.3,181,1067,171,1120,144C1173.3,117,1227,75,1280,96C1333.3,117,1387,203,1413,245.3L1440,288L1440,320L1413.3,320C1386.7,320,1333,320,1280,320C1226.7,320,1173,320,1120,320C1066.7,320,1013,320,960,320C906.7,320,853,320,800,320C746.7,320,693,320,640,320C586.7,320,533,320,480,320C426.7,320,373,320,320,320C266.7,320,213,320,160,320C106.7,320,53,320,27,320L0,320Z"></path></svg>
+            </div>
+             <div class="overlay">
+                 <div class="overlay-panel overlay-left">
+                     <h1>Welcome Back!</h1>
+                     <p>To keep connected with us please login with your personal info</p>
+                     <button class="ghost" id="signIn">Sign In</button>
+                 </div>
+                 <div class="overlay-panel overlay-right">
+                     <h1>Hello, Florida!</h1>
+                     <p>Enter your personal details and start journey with us</p>
+                     <button class="ghost" id="signUp">Sign Up</button>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
+    <footer></footer>
+
+    <script src="{% static 'app/script.js' %}"></script>
+</body>
+</html>
