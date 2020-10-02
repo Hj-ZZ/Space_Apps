@@ -71,3 +71,42 @@ def register(request):
         return HttpResponseRedirect(reverse("mainPage"))  # got to main page
     else:
         pass
+
+def getPosts(request, name):
+    if name == 'profile':
+        posts = request.user.posts.all()
+    elif name == 'following':  # followings of request.user
+        followings = Follow.objects.filter(follower=request.user)
+        posts = followings.posts.all()
+    elif name == 'followers':
+        followers = Follow.objects.filter(followee=request.user)
+        posts = followers.posts.all()
+    elif name == 'all':
+        posts = Post.objects.all()
+    else:
+        category = Category.objects.get(name=name)
+        posts = category.posts.all()
+
+    return JsonResponse([post.serialize() for post in posts], safe=False)
+
+
+@csrf_exempt
+@login_required(login_url="/login")
+def sendPost(request):
+    if request.method != "POST":
+        return JsonResponse({"error": "POST request required."}, status=400)
+
+    data = json.loads(request.body)
+
+    description = data['description']
+    category_name = data['category']
+    category = Category.objects.get(name=category_name)
+
+    video = data['video']
+
+    post = Post(owner=request.user, description=description, date_created=datetime.datetime.now(), category=category,
+                video=video)
+
+    post.save()
+
+    return JsonResponse({"message": "Post Sent successfully"}, status=201)

@@ -9,4 +9,6 @@ urlpatterns = [
     path("register", views.register, name="register"),
 
     #API ROUTES
+    path("getPosts/<str:name>", views.getPosts, name="getPosts"),
+    path("sendPost", views.sendPost, name="sendPost")
 ]
