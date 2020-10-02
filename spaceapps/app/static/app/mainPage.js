@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded',  function(){
-    
+   
+
+
     //Posts
     fetch('/getPosts/all')
     .then(response => response.json())
@@ -9,13 +11,30 @@ document.addEventListener('DOMContentLoaded',  function(){
             
             const post_item = document.createElement("div");
             post_item.className = "post-item";
-            post_item.innerHTML = ` <h3 class = "post-title">${post.owner.username}</h3>
-                                    <h3 class = "post-description">${post.description}</h3> 
+            post_item.innerHTML = ` 
+                                    <a href = "profile/${post.owner.id}"class = "post-owner" data-id = "${post.owner.id}">${post.owner.username}</a>
+                                    <h2 class = "post-description">${post.description}</h2> 
                                     <video class = "post-video" src = ${post.video} type="video/mp4" width = "400px" height = "400px" controls="controls"></video>
+                                    <div class = "like-button" data-id = "${post.id}" data-isLiked = "true">
+                                        ${post.like_count} like(s)
+                                    </div>
             `
             document.querySelector(".post-container").appendChild(post_item);
         })
+
+        document.querySelectorAll('.like-button').forEach(div => 
+            div.addEventListener('click', function(div) {
+    
+                like(div);
+    
+            })
+        );
     })
+
+    
+    
+
+    
 
     //Articles
     fetch('/getArticles')
@@ -24,7 +43,7 @@ document.addEventListener('DOMContentLoaded',  function(){
         articles.forEach(article => {
             const articleItem = document.createElement("div");
             articleItem.className = "article-item";
-            articleItem.innerHTML = `<h3>${article.title}</h3>
+            articleItem.innerHTML = `<h2>${article.title}</h2>
                                     <img src = ${article.image} alt = "No Image D:" />`
 
             document.querySelector(".article-container").appendChild(articleItem);
@@ -45,5 +64,24 @@ document.addEventListener('DOMContentLoaded',  function(){
             document.querySelector(".categories-container").appendChild(categoryItem);
         })
     })
+
+    function like(e){
+        var likeButton = e.currentTarget;
+        
+        var post_id = likeButton.dataset.id;
+        
+        var isLiked = likeButton.dataset.isLiked === 'true'
+
+        fetch(`/like/${post_id}`, {
+            method: 'PUT',
+        }).then(response => response.json())
+        .then(result => {
+            console.log(result);
+            
+            likeButton.innerHTML = `${result.like_count} like(s)`;
+            
+        })
+    }
+    
     
 });

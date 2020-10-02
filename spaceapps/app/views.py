@@ -20,8 +20,8 @@ def index(request):
     return render(request, "app/landingPage.html")
 
 
-def home(request):
-    return render(request, "app/home.html")
+def mainPage(request):
+    return render(request, "app/mainPage.html")
 
 
 @csrf_exempt
@@ -91,7 +91,7 @@ def getPosts(request, name):
     else:
         category = Category.objects.get(name=name)
         posts = category.posts.all()
-
+    print("HELLLLLLLO")
     return JsonResponse([post.serialize() for post in posts], safe=False)
 
 

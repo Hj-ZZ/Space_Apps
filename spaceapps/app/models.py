@@ -5,7 +5,7 @@ from django.db.models import Model
 
 class User(AbstractUser):
     # Image with no urls
-    image = models.ImageField(blank=True, null=True, upload_to="images/%Y/%m/%D/")
+    image = models.ImageField(blank=True, upload_to="images/%Y/%m/%D/", default = 'images/default.jpg')
     name = models.CharField(max_length=100, blank=True, null=True)
     bio = models.CharField(max_length=400, blank=True, null=True)
 
@@ -53,7 +53,7 @@ class Article(models.Model):
         return {
             "id": self.id,
             "url_article": self.url_article,
-            "content": self.text,
+            "title": self.title,
             "image": self.image.url,
         }
 
