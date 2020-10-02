@@ -132,3 +132,30 @@ class Comment(models.Model):
 
     def __str__(self):
         return "Comment by {}".format(self.owner.username)
+
+
+class Follow(models.Model):
+    follower = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, related_name="followees"
+    )
+    followee = models.ForeignKey(
+        User, on_delete=models.CASCADE, null=True, related_name="followers"
+    )
+
+    def serialize(self):
+        return {
+            "id": self.id,
+        }
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+        }
+
+    def __str__(self):
+        return self.name
