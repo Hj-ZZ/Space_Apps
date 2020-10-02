@@ -31,12 +31,10 @@ class User(AbstractUser):
 
 class Article(models.Model):
     title = models.CharField(max_length=200)
-    text = models.TextField()
-    authors = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, related_name="articles"
+    url_article = models.URLField(max_length=200)
+    post = models.OneToOneField(
+        "Post", on_delete=models.SET_NULL, blank=True, null=True
     )
-    post = models.OneToOneField("Post", on_delete=models.CASCADE)
-    date_created = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(
         "Category",
         on_delete=models.SET_NULL,
@@ -54,17 +52,16 @@ class Article(models.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "title": self.title,
+            "url_article": self.url_article,
             "content": self.text,
             "image": self.image.url,
-            "date": self.date_created,
-            "authors": self.authors_id,
         }
 
 
 class Post(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
-    #  TODO: VIDEO
+    url_article = models.URLField(max_length=200)
+
     description = models.TextField(max_length=600)
     date_created = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(
@@ -84,6 +81,7 @@ class Post(models.Model):
             "owner": self.owner.serialize(),
             "video": self.video.url,
             "description": self.description,
+            "url_article": self.url_article,
             "comments": [comment.serialize() for comment in self.comment.all()],
             "date_created": self.date_created.strftime("%b %-d %Y, %-I:%M %p"),
             "like_count": self.number_likes(),
