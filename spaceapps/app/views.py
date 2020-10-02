@@ -18,5 +18,5 @@ def index(request):
         return HttpResponseRedirect(reverse("mainPage"))
     return render(request, "app/index.html")
 
-def mainPage(request):
-    return render(request, "app/mainPage.html")
+def home(request):
+    return render(request, "app/home.html")
