@@ -91,7 +91,7 @@ def getPosts(request, name):
     else:
         category = Category.objects.get(name=name)
         posts = category.posts.all()
-    print("HELLLLLLLO")
+    
     return JsonResponse([post.serialize() for post in posts], safe=False)
 
 
