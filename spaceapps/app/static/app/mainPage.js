@@ -71,13 +71,12 @@ document.addEventListener('DOMContentLoaded',  function(){
         var post_id = likeButton.dataset.id;
         
         var isLiked = likeButton.dataset.isLiked === 'true'
-
+        
         fetch(`/like/${post_id}`, {
             method: 'PUT',
         }).then(response => response.json())
         .then(result => {
             console.log(result);
-            
             likeButton.innerHTML = `${result.like_count} like(s)`;
             
         })

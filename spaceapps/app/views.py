@@ -17,7 +17,7 @@ from .models import *
 def index(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse("home"))
-    return render(request, "app/landingPage.html")
+    return render(request, "app/mainPage.html")
 
 
 def mainPage(request):
@@ -26,9 +26,9 @@ def mainPage(request):
 
 @csrf_exempt
 def login_view(request):
-
+    print("Hello")
     if request.method == "POST":
-
+        
         data = json.loads(request.body)
 
         username = data.get("username", "")
@@ -96,7 +96,7 @@ def getPosts(request, name):
 
 
 @csrf_exempt
-@login_required(login_url="/login")
+@login_required
 def sendPost(request):
     if request.method != "POST":
         return JsonResponse({"error": "POST request required."}, status=400)
