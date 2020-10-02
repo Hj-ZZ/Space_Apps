@@ -110,3 +110,38 @@ def sendPost(request):
     post.save()
 
     return JsonResponse({"message": "Post Sent successfully"}, status=201)
+
+
+def getCategories(request):
+    categories = Category.objects.all()
+    return JsonResponse([category.serialize() for category in categories], safe=False)
+
+
+@login_required(login_url="/login")
+def currentUser(request):
+    return JsonResponse(request.user.serialize())
+
+
+@login_required(login_url="/login")
+@csrf_exempt
+def like(request, post_id):
+    """
+        Like and unlike + sending in JSON Format the outcome:
+        - is_liked to represent the state liked/unliked
+        - like_count
+    """
+
+    if request.method != "PUT":
+        return JsonResponse({"error": "PUT request required."}, status=400)
+
+    post = Post.objects.get(pk=post_id)
+    user = request.user
+    try:
+        Like.objects.get(owner=user, post=post).delete()
+        return JsonResponse({"message": "Unliked successfully", "is_liked": False, "like_count": post.number_likes()},
+                            safe=False)
+
+    except Like.DoesNotExist:
+        Like.objects.create(owner=user, post=post)
+        return JsonResponse({"message": "Liked successfully", "is_liked": True, "like_count": post.number_likes()},
+                            safe=False)
