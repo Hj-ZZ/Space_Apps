@@ -145,3 +145,55 @@ def like(request, post_id):
         Like.objects.create(owner=user, post=post)
         return JsonResponse({"message": "Liked successfully", "is_liked": True, "like_count": post.number_likes()},
                             safe=False)
+
+
+@login_required(login_url="/login")
+@csrf_exempt
+def follow(request, user_id):
+    """
+        return: JSON format bool is_following and int followers count
+    """
+    if request.method != "POST":
+        return JsonResponse({"error": "POST request required."}, status=400)
+
+    try:
+        user_target = User.objects.get(pk=user_id)
+    except User.DoesNotExist:
+        return JsonResponse({"error": "User Not found."}, status=400)
+    Follow.objects.all()
+    try:
+        # Unfollow
+        Follow.objects.get(following=user_target, follower=request.user).delete()
+        return JsonResponse({"message": "Unfollowed successfully", "is_followed": False,
+                             "followers_count": user_target.followers_count()}, safe=False)
+    except Follow.DoesNotExist:
+        # follow
+        Follow.objects.create(follower=user_target, following=request.user)
+        return JsonResponse(
+            {"message": "followed successfully", "is_followed": True, "followers_count": user_target.followers_count()},
+            safe=False)
+
+
+@csrf_exempt
+def follow_users(request, user_id, type):
+    """
+    type: can be either followees or followers
+    This will return either a user's followees or followers
+    """
+    if request.method != "GET":
+        return JsonResponse({"error": "GET request required."}, status=400)
+    user = User.objects.get_object_or_404(pk=user_id)
+    if type.lower == "followees":
+        followees = user.followees.all()
+        return JsonResponse({"followees": [followee.serialize() for followee in followees]}, status=200)
+
+    elif type.lower == "followers":
+        followers = user.followers.all()
+        return JsonResponse({"followers": [follower.serialize() for follower in followers]}, status=200)
+
+    return JsonResponse({"message": "Something wrong in the backend server happened!"}, status=400)
+
+
+def getArticles(request):
+    articles = Article.objects.all()
+    return JsonResponse([article.serialize() for article in articles], safe = False)
