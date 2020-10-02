@@ -13,17 +13,20 @@ from .models import *
 
 # Create your views here.
 
+
 def index(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse("mainPage"))
-    return render(request, "app/index.html")
+    return render(request, "app/landingPage.html")
+
 
 def home(request):
     return render(request, "app/home.html")
 
+
 @csrf_exempt
 def login_view(request):
-    
+
     if request.method == "POST":
 
         data = json.loads(request.body)
@@ -31,11 +34,13 @@ def login_view(request):
         username = data.get("username", "")
         password = data.get("password", "")
 
-        user = authenticate(request, username=username,password=password)
+        user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
-            return JsonResponse({"message": "Loged in"}, status = 201)  # I didn't return HttpResponseRedirect because fetch calls do not accept such returns
+            return JsonResponse(
+                {"message": "Loged in"}, status=201
+            )  # I didn't return HttpResponseRedirect because fetch calls do not accept such returns
         else:
             return JsonResponse({"message": "Invalid username or Password"})
 
@@ -57,7 +62,6 @@ def register(request):
         password = request.POST["password"]
         confirmation = request.POST["confirmation"]
 
-        
         if password != confirmation:
             return JsonResponse({"message": "Password unmatches confirmation!"})
 
@@ -72,16 +76,17 @@ def register(request):
     else:
         pass
 
+
 def getPosts(request, name):
-    if name == 'profile':
+    if name == "profile":
         posts = request.user.posts.all()
-    elif name == 'following':  # followings of request.user
+    elif name == "following":  # followings of request.user
         followings = Follow.objects.filter(follower=request.user)
         posts = followings.posts.all()
-    elif name == 'followers':
+    elif name == "followers":
         followers = Follow.objects.filter(followee=request.user)
         posts = followers.posts.all()
-    elif name == 'all':
+    elif name == "all":
         posts = Post.objects.all()
     else:
         category = Category.objects.get(name=name)
@@ -98,14 +103,19 @@ def sendPost(request):
 
     data = json.loads(request.body)
 
-    description = data['description']
-    category_name = data['category']
+    description = data["description"]
+    category_name = data["category"]
     category = Category.objects.get(name=category_name)
 
-    video = data['video']
+    video = data["video"]
 
-    post = Post(owner=request.user, description=description, date_created=datetime.datetime.now(), category=category,
-                video=video)
+    post = Post(
+        owner=request.user,
+        description=description,
+        date_created=datetime.datetime.now(),
+        category=category,
+        video=video,
+    )
 
     post.save()
 
@@ -138,13 +148,25 @@ def like(request, post_id):
     user = request.user
     try:
         Like.objects.get(owner=user, post=post).delete()
-        return JsonResponse({"message": "Unliked successfully", "is_liked": False, "like_count": post.number_likes()},
-                            safe=False)
+        return JsonResponse(
+            {
+                "message": "Unliked successfully",
+                "is_liked": False,
+                "like_count": post.number_likes(),
+            },
+            safe=False,
+        )
 
     except Like.DoesNotExist:
         Like.objects.create(owner=user, post=post)
-        return JsonResponse({"message": "Liked successfully", "is_liked": True, "like_count": post.number_likes()},
-                            safe=False)
+        return JsonResponse(
+            {
+                "message": "Liked successfully",
+                "is_liked": True,
+                "like_count": post.number_likes(),
+            },
+            safe=False,
+        )
 
 
 @login_required(login_url="/login")
@@ -164,14 +186,25 @@ def follow(request, user_id):
     try:
         # Unfollow
         Follow.objects.get(following=user_target, follower=request.user).delete()
-        return JsonResponse({"message": "Unfollowed successfully", "is_followed": False,
-                             "followers_count": user_target.followers_count()}, safe=False)
+        return JsonResponse(
+            {
+                "message": "Unfollowed successfully",
+                "is_followed": False,
+                "followers_count": user_target.followers_count(),
+            },
+            safe=False,
+        )
     except Follow.DoesNotExist:
         # follow
         Follow.objects.create(follower=user_target, following=request.user)
         return JsonResponse(
-            {"message": "followed successfully", "is_followed": True, "followers_count": user_target.followers_count()},
-            safe=False)
+            {
+                "message": "followed successfully",
+                "is_followed": True,
+                "followers_count": user_target.followers_count(),
+            },
+            safe=False,
+        )
 
 
 @csrf_exempt
@@ -185,15 +218,21 @@ def follow_users(request, user_id, type):
     user = User.objects.get_object_or_404(pk=user_id)
     if type.lower == "followees":
         followees = user.followees.all()
-        return JsonResponse({"followees": [followee.serialize() for followee in followees]}, status=200)
+        return JsonResponse(
+            {"followees": [followee.serialize() for followee in followees]}, status=200
+        )
 
     elif type.lower == "followers":
         followers = user.followers.all()
-        return JsonResponse({"followers": [follower.serialize() for follower in followers]}, status=200)
+        return JsonResponse(
+            {"followers": [follower.serialize() for follower in followers]}, status=200
+        )
 
-    return JsonResponse({"message": "Something wrong in the backend server happened!"}, status=400)
+    return JsonResponse(
+        {"message": "Something wrong in the backend server happened!"}, status=400
+    )
 
 
 def getArticles(request):
     articles = Article.objects.all()
-    return JsonResponse([article.serialize() for article in articles], safe = False)
+    return JsonResponse([article.serialize() for article in articles], safe=False)
