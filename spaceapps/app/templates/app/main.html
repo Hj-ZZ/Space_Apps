@@ -17,13 +17,15 @@
         <div class="main-posts">
                 <div class="post-video">
                     <div class="post-face">
-                        <img src="{{user.image.url}}" alt="profile" id= "post-avatar">
+                        <a href="{% url 'profile' user.id %}">
+                          <img src="{{user.image.url}}" alt="profile" id= "post-avatar">
+
+                        </a>
                     </div>
                     <div class="post-stuff">
                         <div class="top-post">
-                            <input type="text"  placeholder="What's to share?" id="your-caption description">
+                            <input type="url"  placeholder="What's to share?" id="your-caption description">
                         </div>
-
                         <div class="bottom-post">
                             <input type="file" id="real-file" accept='video/*' hidden="hidden" />
                             <i class="fas fa-2x fa-film" id="custom-button"></i>
@@ -33,8 +35,44 @@
                     </div>
                 </div>
         </div>
+        <div class="nasa-app" style="padding-top:70px;">
+          <h2 style="text-align: center;">Challenges</h2>
+            <div class="artic1">
+        <div class="picA1">
+        </div>
+      <div class="desc">
+        <i class="fa fa-calendar"> September 3,2020</i>
+        <a href="https://www.nasa.gov/content/energy-water-overview" target="_blank"><h3>Energy & Water Overview</h3></a>
+        <p>NASA implements energy efficiency processes in many...</p>
+        <p>by NASA</p>
+        <button type="button" name="button" class = "challenge-btn">Record Now</button>
 
-        <div class="nasa-app"></div>
+      </div>
+      </div>
+      <div class="artic1">
+        <div class="picA2">
+        </div>
+      <div class="desc">
+        <i class="fa fa-calendar"> September 3,2020</i>
+        <a href="https://www.nasa.gov/content/green-engineering-overview" target="_blank"><h3> Green Engineering Overview</h3></a>
+        <p> Green Engineering is helping to ensure that NASA ...</p>
+        <p>by  NASA </p>
+        <button type="button" name="button" class = "challenge-btn">Record Now</button>
+      </div>
+      </div>
+      <div class="artic1">
+        <div class="picA3">
+        </div>
+      <div class="desc">
+        <i class="fa fa-calendar"> September 3,2020</i>
+        <a href="https://www.nasa.gov/content/natural-resources-0" target="_blank"><h1> Natural Resources</h1></a>
+        <p>NASA strives to promote increased efficiency of raw materials ...</p>
+        <p>by  NASA </p>
+        <button type="button" name="button" class = "challenge-btn">Record Now</button>
+
+      </div>
+      </div>
+        </div>
     </div>
 
     {% endblock %}

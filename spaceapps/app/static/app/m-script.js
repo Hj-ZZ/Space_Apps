@@ -19,7 +19,7 @@ realFileBtn.addEventListener("change", function() {
 document.addEventListener('DOMContentLoaded',  function(){
 
 
-
+  console.log("hello")
   //Posts
   fetch('/getPosts/all')
   .then(response => response.json())
@@ -34,20 +34,20 @@ document.addEventListener('DOMContentLoaded',  function(){
           post_item.className = "post-item";
           post_item.innerHTML = `
                                     <div class = "user-post">
-                                    <img class = "user-image" src="https://www.nj.com/resizer/zovGSasCaR41h_yUGYHXbVTQW2A=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/SJGKVE5UNVESVCW7BBOHKQCZVE.jpg"></img>
+                                    <img class = "user-image" src="${post.owner.image}"></img>
                                     <a href = "profile/${post.owner.id}"class = "post-owner" data-id = "${post.owner.id}">${post.owner.username}</a>
                                     </div>
                                     <video class = "post-video" src = ${post.video} type="video/mp4" controls="controls"></video>
-                                    <p class = "post-description">${post.description}</p>
                                     <div class = "interraction">
+
                                     <div class = "like-button" data-id = "${post.id}" data-isLiked = "true">
-                                         <i class="fas fa-heart fa-lg"></i>${post.like_count}
+                                         <i class="fas fa-heart fa-lg"></i>  ${post.like_count}
 
 
                                     </div>
-                                    <a class="btn-explore">explore</a>
-                                    <div>
-          `
+                                    <a class="btn-explore" href="${post.url_article}"target="_blank">explore</a>
+                                    <div>`
+
           container.appendChild(post_item);
       })
       document.querySelector(".main-posts").appendChild(container)
@@ -81,39 +81,26 @@ document.addEventListener('DOMContentLoaded',  function(){
       })
   })
 
-  //Categories
-  /*
-  fetch('/getCategories')
-  .then(response => response.json())
-  .then(categories => {
-      categories.forEach(category => {
 
-          const categoryItem = document.createElement("div");
-          categoryItem.className = "category-item";
-          categoryItem.innerHTML = category.name;
+function like(e){
+    var likeButton = e.currentTarget;
 
-          document.querySelector(".categories-container").appendChild(categoryItem);
-      })
-  })
-  */
+    var post_id = likeButton.dataset.id;
 
-  function like(e){
-    console.log("hello world!")
-      var likeButton = e.currentTarget;
+    var isLiked = likeButton.dataset.isLiked === 'true'
 
-      var post_id = likeButton.dataset.id;
+    fetch(`/like/${post_id}`, {
+        method: 'PUT',
+    }).then(response => response.json())
+    .then(result => {
+        console.log(result);
+        likeButton.innerHTML = `<i class="fas fa-heart fa-lg"></i> ${result.like_count}`;
+        console.log(likeButton)
+        likeButton.querySelector('i').style.color = result.is_liked ? "green":"gray";
+        console.log(result.is_liked)
 
-      var isLiked = likeButton.dataset.isLiked === 'true'
-
-      fetch(`/like/${post_id}`, {
-          method: 'PUT',
-      }).then(response => response.json())
-      .then(result => {
-          console.log(result);
-          likeButton.innerHTML = `<i class="fas fa-heart">${result.like_count}</i>`;
-
-      })
-  }
+    })
+}
 
 
 });

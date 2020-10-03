@@ -103,18 +103,11 @@ def sendPost(request):
 
     data = json.loads(request.body)
 
-    description = data["description"]
-
     category = Category.objects.get(name=category_name)
 
     video = data["video"]
 
-    post = Post(
-        owner=request.user,
-        description=description,
-        date_created=datetime.datetime.now(),
-        video=video,
-    )
+    post = Post(owner=request.user, date_created=datetime.datetime.now(), video=video,)
 
     post.save()
 

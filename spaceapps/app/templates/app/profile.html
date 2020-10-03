@@ -4,8 +4,8 @@
 {% block title%}Profil{%endblock%}
 
 {% block styles%}
+<link rel="stylesheet" href="{% static 'app/style.css' %}">
 
-    <link rel="stylesheet" href="{% static 'app/style.css' %}">
     {% endblock %}
 
 </head>
@@ -50,6 +50,30 @@
                     </div>
                 </div>
             </div>
+            <div style="display: flex;width: 100%; justify-content: center;">
+
+            <div class="container-posts" style="width: 80%;align-self: center;">
+              {% for post in posts%}
+              <div class="post-item">
+
+              <div class = "user-post" >
+              <img class = "user-image" src="{{post.owner.image.url}}"></img>
+              <a href = "{% url 'profile' post.owner.id%}"class = "post-owner" data-id = "${post.owner.id}">{{post.owner.username}}</a>
+              </div>
+              <video class = "post-video" src = {{post.video.url}} type="video/mp4" controls="controls"></video>
+              <div class = "interraction">
+              <div class = "like-button" data-id = "${post.id}" data-isLiked = "true">
+                   <i class="fas fa-heart fa-lg"></i> {{post.number_likes}}
+
+
+              </div>
+              <a class="btn-explore" href = "{{post.url_article}} ">explore</a>
+              <div>              </div>
+
+                {%endfor%}
+            </div>
+          </div>
+
         </main>
     </div>
     {% endblock%}

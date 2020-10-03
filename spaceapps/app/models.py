@@ -64,7 +64,6 @@ class Post(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     url_article = models.URLField(max_length=200)
 
-    description = models.TextField(max_length=600)
     date_created = models.DateTimeField(auto_now_add=True)
     video = models.FileField(blank=True, null=True, upload_to="videos/%Y/%m/%D/")
 
@@ -79,7 +78,6 @@ class Post(models.Model):
             "id": self.id,
             "owner": self.owner.serialize(),
             "video": self.video.url,
-            "description": self.description,
             "url_article": self.url_article,
             "comments": [comment.serialize() for comment in self.comment.all()],
             "date_created": self.date_created.strftime("%b %-d %Y, %-I:%M %p"),

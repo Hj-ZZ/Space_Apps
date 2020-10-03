@@ -256,7 +256,7 @@ footer{
     color: #d8f3dcce;
 }
 
-#dot{
+.dot{
     color: #52B788;
     font-size: 70px;
 }
@@ -1015,7 +1015,7 @@ input:focus{
 
 .top-post{
     margin-right: 10px;
-    height: 60%;
+    height: 60px;
     border-bottom: 0.5px solid rgb(164, 252, 208);
 }
 
@@ -1182,6 +1182,7 @@ input:focus{
 }
 
 .nasa-app{
+  background: #1e1f27;
 
 }
 
@@ -1224,14 +1225,97 @@ input:focus{
   height:270px;
 }
 .btn-explore{
-  padding: 5px 10px;
+  padding: 5px 5px;
   border:1px solid white;
   border-radius: 50px;
-
+  background-color: #74c69dcc;
+  height: 40px;
+  text-align: center;
+  width: 100px;
+  color: black;
   margin-left: auto;
+  font-size: 20px;
+  font-weight: bold;
+
+
 }
 .interraction{
   display: flex;
   align-items: center;
 
+}
+
+.artic1{
+       margin: 30px;
+      border: 1px solid black;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      font-family: 'Gayathri', sans-serif;
+      border-radius: 40px;
+
+     }
+     .picA1{
+      background-image: url(imgs/solar.jpg);
+      height: 180px;
+      border-top-right-radius: 40px;
+      border-top-left-radius: 40px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+     }
+     .picA2{
+      background-image: url(imgs/GreenEng.png);
+      height: 180px;
+      border-top-right-radius: 40px;
+      border-top-left-radius: 40px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+     }
+     .picA3{
+      background-image: url(imgs/trees.png);
+      height: 180px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-top-right-radius: 40px;
+      border-top-left-radius: 40px;
+     }
+     .desc{
+       padding:  20px;
+       background-color: rgba(105, 105, 105, 0.10);
+       color: rgb(168, 161, 161) ;
+       border-bottom-right-radius: 40px;
+      border-bottom-left-radius: 40px;
+     }
+     .desc > a{
+       color:rgb(168, 161, 161);
+       text-decoration: none;
+     }
+     .desc > a:hover{
+       text-decoration: underline;
+     }
+.challenge-btn {
+  text-align: center;
+  margin-left: 30%;
+  padding: 7px;
+  background-color: #74c69dcc;
+  margin-right: auto;
+  border: 1px;
+  border-radius: 50px;
+  height: 40px;
+  font-size: 17px;
+
+  font-weight: bold;
+  width: 120px;
+}
+.categories{
+    position: fixed;
+    height: 100vh;
+}
+
+.main-posts, .profil{
+    margin-left: 20%;
+}
+.like-button, .btn-explore{
+  margin-top: 20px;
 }
