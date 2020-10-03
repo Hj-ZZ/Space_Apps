@@ -372,7 +372,7 @@ footer{
 
 @media screen and (min-width: 769px){
     .navbar-nav, .link-text, #underline{
-        visibility: visible !important; 
+        visibility: visible !important;
         opacity: 1 !important;
     }
     .menu-icon{
@@ -444,7 +444,7 @@ input {
 .container {
 	background-color: #081C15;
 	border-radius: 10px;
-  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25),
 			0 10px 10px rgba(0,0,0,0.22);
 	position: relative;
 	overflow: hidden;
@@ -486,7 +486,7 @@ input {
 		opacity: 0;
 		z-index: 1;
 	}
-	
+
 	50%, 100% {
 		opacity: 1;
 		z-index: 5;
@@ -625,7 +625,7 @@ a{
         height:100vh !important;
         margin-top: 0;
         bottom:0 !important;
-    
+
     }
     .container{
         height:100%;
@@ -672,7 +672,7 @@ a{
     }
 
     .respo{
-        display:none !important; 
+        display:none !important;
     }
     .overlay{
         top:-2.5%;
@@ -710,7 +710,7 @@ a{
     height: 100%;
 }
 .profil{
-    background-color: #081C15;
+    background-color: black;
     width: 80%;
     height: 100%;
 }
@@ -721,7 +721,7 @@ a{
 
 .about-me{
     height: 480px;
-    background-color: #1B4332;
+    background-color: #1e1f27;
 }
 
 .p-data{
@@ -903,7 +903,7 @@ a{
 .main-posts{
     width: 60%;
     height: 100%;
-   
+
 }
 .nasa-app{
     width: 30%;
@@ -1173,4 +1173,13 @@ input:focus{
     .for-you i, .following-m i{
         margin-left: 25%;
     }
+}
+
+.nasa-app{
+
+}
+
+.post-item{
+  margin: 50px;
+  width: 70%;
 }

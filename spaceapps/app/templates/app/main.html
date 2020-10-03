@@ -17,15 +17,13 @@
         <div class="main-posts">
                 <div class="post-video">
                     <div class="post-face">
-                        <img src="imgs/avatar.png" alt="profile" id= "post-avatar">
+                        <img src="{{user.image.url}}" alt="profile" id= "post-avatar">
                     </div>
                     <div class="post-stuff">
                         <div class="top-post">
-                            <input type="text"  placeholder="What's to share?" id="your-caption">
+                            <input type="text"  placeholder="What's to share?" id="your-caption description">
                         </div>
-                        <div class="top-post">
-                            <input type="url"  placeholder="url">
-                        </div>
+
                         <div class="bottom-post">
                             <input type="file" id="real-file" accept='video/*' hidden="hidden" />
                             <i class="fas fa-2x fa-film" id="custom-button"></i>
