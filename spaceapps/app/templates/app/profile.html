@@ -1,35 +1,16 @@
-{% load static %}
+{% extends 'app/layout.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous"/>
-    <link href="https://fonts.googleapis.com/css2?family=Gayathri:wght@100&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Taviraj:wght@300;500&display=swap" rel="stylesheet">
+{% load static %}
+{% block title%}Profil{%endblock%}
+
+{% block styles%}
+
     <link rel="stylesheet" href="{% static 'app/style.css' %}">
-    <title>Profil</title>
+    {% endblock %}
+
 </head>
 <body>
-    <div class="profil-container">
-        <div class="categories">
-          <img src="/imgs/Horizontal White.png" class = "logo-N2" alt="">
-          <div class="for-you">
-              <i class="fas fa-2x fa-home"></i>
-              <span>For You</span>
-          </div>
-          <div class="following-m">
-              <i class="fas fa-2x fa-user-friends"></i>
-              <span>Following</span>
-          </div>
-          <div class="line"></div>
-          <ul>
-              <li>Articles</li>
-              <li>Artwork</li>
-              <li>Events</li>
-          </ul>
-        </div>
+    {% block content%}
         <main class="profil">
             <div class="about-me">
                 <div class="top-i">
@@ -71,7 +52,8 @@
             </div>
         </main>
     </div>
-</body>
+    {% endblock%}
+    {%block scripts%}
 <script src = "{% static 'app/profile.js' %}"></script>
 
-</html>
+{%endblock%}
