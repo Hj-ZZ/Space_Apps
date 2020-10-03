@@ -1187,7 +1187,7 @@ input:focus{
 
      }
      .picA1{
-      background-image: url(solar.jpg); 
+      background-image: url(imgs/solar.jpg); 
       height: 180px;
       border-top-right-radius: 40px;
       border-top-left-radius: 40px;
@@ -1196,7 +1196,7 @@ input:focus{
       background-size: cover;
      }
      .picA2{
-      background-image: url(GreenEng.png); 
+      background-image: url(imgs/GreenEng.png); 
       height: 180px;
       border-top-right-radius: 40px;
       border-top-left-radius: 40px;
@@ -1205,7 +1205,7 @@ input:focus{
       background-size: cover;
      }
      .picA3{
-      background-image: url(trees.png); 
+      background-image: url(imgs/trees.png); 
       height: 180px;
       background-position: center;
       background-repeat: no-repeat;
