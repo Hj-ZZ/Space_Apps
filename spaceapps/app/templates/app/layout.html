@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'app/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&family=Raleway&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous"/>
+    <script src="https://use.fontawesome.com/9562af5d6b.js"></script>
+    {% block styles %}
+    {% endblock %}
+    <title>{% block title %}NAMMME{% endblock %}</title>
+</head>
+<body>
+  {% block search%}
+  {%endblock%}
+    <div class="leave">
+        <a href="{% url 'logout'%}"><i class="fas fa-2x fa-door-open"></i></a>
+    </div>
+
+    <div class="main-container">
+        <div class="categories">
+            <div class="main-categories">
+
+                <img src="{% static '/imgs/Horizontal White.png'%}" class = "logo-N2" alt="">
+                <div class="for-you">
+                    <i class="fas fa-2x fa-home"></i>
+                    <a href="{%url 'home'%}"><span>For You</span></a>
+                </div>
+                <div class="following-m">
+                    <i class="fas fa-2x fa-user-friends"></i>
+                    <span>Following</span>
+                </div>
+                <div class="line"></div>
+                <ul>
+
+                    <li>Articles</li>
+                    <li>Artwork</li>
+                    <li>Events</li>
+                </ul>
+            </div>
+        </div>
+        {% block content%}
+        {% endblock %}
+    </div>
+    {% block script %}
+    {% endblock %}
+    <script src = "{% static 'app/m-script.js' %}"></script>
+</body>
+</html>
