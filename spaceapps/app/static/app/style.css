@@ -1178,3 +1178,52 @@ input:focus{
 .nasa-app{
    
 }
+.artic1{
+       margin-top: 20px;
+      border: 1px solid black;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      font-family: 'Merriweather', serif;
+      border-radius: 40px;
+
+     }
+     .picA1{
+      background-image: url(solar.jpg); 
+      height: 180px;
+      border-top-right-radius: 40px;
+      border-top-left-radius: 40px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+     }
+     .picA2{
+      background-image: url(GreenEng.png); 
+      height: 180px;
+      border-top-right-radius: 40px;
+      border-top-left-radius: 40px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+     }
+     .picA3{
+      background-image: url(trees.png); 
+      height: 180px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-top-right-radius: 40px;
+      border-top-left-radius: 40px;
+     }
+     .desc{
+       padding:  20px;
+       background-color: rgb(34, 33, 33);
+       color: rgb(168, 161, 161) ;
+       border-bottom-right-radius: 40px;
+      border-bottom-left-radius: 40px;
+     }
+     .desc > a{
+       color:rgb(168, 161, 161);
+       text-decoration: none;
+     }
+     .desc > a:hover{
+       text-decoration: underline;
+     }
