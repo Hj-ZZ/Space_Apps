@@ -24,23 +24,33 @@ document.addEventListener('DOMContentLoaded',  function(){
   fetch('/getPosts/all')
   .then(response => response.json())
   .then(posts => {
+    const container = document.createElement("div");
 
       posts.forEach(post => {
+          container.className = "container-posts"
 
           const post_item = document.createElement("div");
+
           post_item.className = "post-item";
           post_item.innerHTML = `
+                                    <div class = "user-post">
+                                    <img class = "user-image" src="https://www.nj.com/resizer/zovGSasCaR41h_yUGYHXbVTQW2A=/1280x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/SJGKVE5UNVESVCW7BBOHKQCZVE.jpg"></img>
                                     <a href = "profile/${post.owner.id}"class = "post-owner" data-id = "${post.owner.id}">${post.owner.username}</a>
-                                    <h2 class = "post-description">${post.description}</h2>
-                                    <video class = "post-video" src = ${post.video} type="video/mp4" controls="controls"></video>
-                                    <div class = "like-button" data-id = "${post.id}" data-isLiked = "true">
-                                        ${post.like_count} like(s)
                                     </div>
+                                    <video class = "post-video" src = ${post.video} type="video/mp4" controls="controls"></video>
+                                    <p class = "post-description">${post.description}</p>
+                                    <div class = "interraction">
+                                    <div class = "like-button" data-id = "${post.id}" data-isLiked = "true">
+                                         <i class="fas fa-heart fa-lg"></i>${post.like_count}
 
+
+                                    </div>
+                                    <a class="btn-explore">explore</a>
+                                    <div>
           `
-          document.querySelector(".main-posts").appendChild(post_item);
+          container.appendChild(post_item);
       })
-
+      document.querySelector(".main-posts").appendChild(container)
       document.querySelectorAll('.like-button').forEach(div =>
           div.addEventListener('click', function(div) {
 
@@ -88,6 +98,7 @@ document.addEventListener('DOMContentLoaded',  function(){
   */
 
   function like(e){
+    console.log("hello world!")
       var likeButton = e.currentTarget;
 
       var post_id = likeButton.dataset.id;
@@ -99,7 +110,7 @@ document.addEventListener('DOMContentLoaded',  function(){
       }).then(response => response.json())
       .then(result => {
           console.log(result);
-          likeButton.innerHTML = `${result.like_count} like(s)`;
+          likeButton.innerHTML = `<i class="fas fa-heart">${result.like_count}</i>`;
 
       })
   }
