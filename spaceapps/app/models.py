@@ -66,9 +66,6 @@ class Post(models.Model):
 
     description = models.TextField(max_length=600)
     date_created = models.DateTimeField(auto_now_add=True)
-    category = models.ForeignKey(
-        "Category", models.SET_NULL, null=True, related_name="posts"
-    )
     video = models.FileField(blank=True, null=True, upload_to="videos/%Y/%m/%D/")
 
     def number_likes(self):
