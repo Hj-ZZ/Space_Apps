@@ -17,18 +17,18 @@ from .models import *
 def index(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect(reverse("home"))
-    return render(request, "app/mainPage.html")
+    return render(request, "app/landingPage.html")
 
 
-def mainPage(request):
-    return render(request, "app/mainPage.html")
+def home(request):
+    return render(request, "app/main.html")
 
 
 @csrf_exempt
 def login_view(request):
     print("Hello")
     if request.method == "POST":
-        
+
         data = json.loads(request.body)
 
         username = data.get("username", "")
@@ -72,7 +72,7 @@ def register(request):
         except IntegrityError:
             return JsonResponse({"message": "Username/email/password already taken"})
         login(request, user)
-        return HttpResponseRedirect(reverse("mainPage"))  # got to main page
+        return HttpResponseRedirect(reverse("home"))  # got to main page
     else:
         pass
 
@@ -91,7 +91,7 @@ def getPosts(request, name):
     else:
         category = Category.objects.get(name=name)
         posts = category.posts.all()
-    
+
     return JsonResponse([post.serialize() for post in posts], safe=False)
 
 

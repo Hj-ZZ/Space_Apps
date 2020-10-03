@@ -3,7 +3,6 @@ var followers_count;
 var is_followed;
 var user_id;
 document.addEventListener('DOMContentLoaded', function () {
-  alert("hello world")
   try {
       follow_btn = document.querySelector('.follow-btn');
       user_id = parseInt(follow_btn.dataset.user_id)
@@ -42,7 +41,6 @@ function follow(user_id){
       })
       .then(response => response.json())
       .then(result => {
-          console.log(result);
           followers_count = result.followers_count
           is_followed = result.is_followed
           updateFollowStats();
