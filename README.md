@@ -31,6 +31,8 @@ Liking, and following people:
 
 Comments, Recommendation system, Chatting.
 
+We are also planing on Using Django Rest and React and making the app a one page app.
+
 ## Technologies Used:
 
 Django, APIs, Javascript, CSS, HTML
