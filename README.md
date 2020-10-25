@@ -30,3 +30,7 @@ Liking, and following people:
 ## Features that we are still working on: 
 
 Comments, Recommendation system, Chatting.
+
+## Technologies Used:
+
+Django, APIs, Javascript, CSS, HTML
