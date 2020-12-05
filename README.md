@@ -8,29 +8,18 @@ This is a social media like platform that brings sustainability enthusiasts toge
 
 ## Main features:
 
-Creating accounts to join the community and login in and out:
-
-Posting Videos linked to a link:
-
-These videos helps explain/promote the link that are provided with.
-![alt text](https://ibb.co/SQwRDqv)
-
-![](nameFile.gif)
-
-
-Exploring the link that is shared with the video
-
-![](nameFile.gif)
-.
-
+Creating accounts to join the community and login in and out
+Posting Videos linked to a link. These videos helps explain/promote the link that are provided with.
+Exploring the link that is shared with the video.
 Liking, and following people:
 
-![](nameFile.gif)
+For a more in depth demo:
+https://docs.google.com/presentation/d/14hKTAIRIT7QMvPyZJ4WPtisyyCQvV-8HBTkxpI7NNtw/edit?usp=sharing
 
 
 ## Features that we are still working on: 
 
-Comments, Recommendation system, Chatting.
+Comments, Recommendation system, Chatting, frontend of main page.
 
 We are also planing on Using Django Rest and React and making the app a one page app.
 
