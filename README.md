@@ -13,6 +13,7 @@ Creating accounts to join the community and login in and out:
 Posting Videos linked to a link:
 
 These videos helps explain/promote the link that are provided with.
+![alt text](https://ibb.co/SQwRDqv)
 
 ![](nameFile.gif)
 
